@@ -4,3 +4,21 @@ $theme-colors: (
   "primary": #dddddd,
   "secondary": #3b3b3b
 );
+
+$wallahFrer: blue;
+$gris: grey;
+$orange: #ff9f1c;
+$white: #fdfffc;
+
+body {
+  background-color: $orange;
+  color: $white;
+}
+
+tr {
+  color: $white;
+}
+
+td {
+  color: $white;
+}

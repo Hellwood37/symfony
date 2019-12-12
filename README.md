@@ -1,3 +1,6 @@
+Video quete 12:
+https://www.loom.com/share/f0d913bbda07414dabaf1e6d41a827bf
+
 # Project installation
 
 ## 1. Configure your environment
