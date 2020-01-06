@@ -7,6 +7,9 @@ https://www.loom.com/share/ef24a7d319e342979d180b8a68068d25
 Vidéo quete 14
 https://www.loom.com/share/bf3a9a42d2054e6590e866f704338be9
 
+Vidéo quete 15
+https://www.loom.com/share/a9a1c79f6461458cb59847d281ceec66
+
 # Project installation
 
 ## 1. Configure your environment
