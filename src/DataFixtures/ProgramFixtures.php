@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Program;
+use App\Service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -24,6 +25,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
             'poster' => 'https://static.mmzstatic.com/wp-content/uploads/2018/05/manquer-a-son-chat.jpg',
 
+            'slug' => 'Walking Dead',
+
         ],
 
         'The Haunting Of Hill House' => [
@@ -37,6 +40,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             'year' => '2011',
 
             'poster' => 'https://static.mmzstatic.com/wp-content/uploads/2018/05/manquer-a-son-chat.jpg',
+
+            'slug' => 'The Haunting Of Hill House',
 
         ],
 
@@ -52,6 +57,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
             'poster' => 'https://static.mmzstatic.com/wp-content/uploads/2018/05/manquer-a-son-chat.jpg',
 
+            'slug' => 'American Horror Story',
+
         ],
 
         'Love Death And Robots' => [
@@ -65,6 +72,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             'year' => '2011',
 
             'poster' => 'https://static.mmzstatic.com/wp-content/uploads/2018/05/manquer-a-son-chat.jpg',
+
+            'slug' => 'Love Death And Robots',
 
         ],
 
@@ -80,6 +89,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
             'poster' => 'https://static.mmzstatic.com/wp-content/uploads/2018/05/manquer-a-son-chat.jpg',
 
+            'slug' => 'Penny Dreadful',
+
         ],
 
         'Fear The Walking Dead' => [
@@ -94,6 +105,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
 
             'poster' => 'https://static.mmzstatic.com/wp-content/uploads/2018/05/manquer-a-son-chat.jpg',
 
+            'slug' => 'Fear The Walking Dead',
+
         ],
 
     ];
@@ -102,6 +115,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $i = 0;
+        $slugify = new Slugify();
         foreach (self::PROGRAMS as $title => $data) {
             $program = new Program();
             $program->setTitle($title);
@@ -110,7 +124,12 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program->setYear($data['year']);
             $program->setPoster($data['poster']);
             $program->setCategory($this->getReference('categorie_0'));
-// categorie_0 fait référence à la première catégorie générée.
+            
+            
+            //Service Slugify
+            $slug = $slugify->generate($program->getTitle());
+            $program->setSlug($slug);
+            // categorie_0 fait référence à la première catégorie générée.
             $manager->persist($program);
             //$this->addReference('walking', $program);  
             $this->addReference('program_'.$i, $program);

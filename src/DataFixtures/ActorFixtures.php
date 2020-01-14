@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Service\Slugify;
 use App\Entity\Actor;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -20,10 +21,17 @@ class ActorFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker  =  Faker\Factory::create('fr_FR');
         //foreach (self::ACTORS as $key => $name)
+        $slugify = new Slugify();
         for ($i = 0; $i < 50; $i++)
         {
             $actor = new Actor();
             $actor->setName($faker->name);
+            $actor->setSlug($faker->slug);
+
+            //Service Slugify
+            $slug = $slugify->generate($actor->getName());
+            $actor->setSlug($slug);
+
             $manager->persist($actor);
             //$this->addReference('actor_' . $key, $actor);
             $this->addReference('actor_' . $i, $actor);
